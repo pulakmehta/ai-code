@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Coding Editors Directory</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #818cf8;
+            --background: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --accent: #c7d2fe;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 800px;
+            margin: -2rem auto 3rem;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--accent);
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .editors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .editor-card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .editor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .editor-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .editor-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .editor-title {
+            flex-grow: 1;
+        }
+
+        .editor-title h2 {
+            margin-bottom: 0.25rem;
+            color: var(--primary);
+        }
+
+        .price-tag {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .tags-container {
+            margin: 1rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .features-list {
+            margin-top: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .features-list li {
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+
+        .features-list li::before {
+            content: '•';
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: -1.2rem;
+        }
+
+        .compatibility {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--accent);
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        .faq-section {
+            margin-top: 4rem;
+            padding-top: 4rem;
+            border-top: 1px solid var(--accent);
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .faq-item p {
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+      
+
+        @media (max-width: 768px) {
+            header {
+                padding: 4rem 1rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .editors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AI Coding Editors Directory</h1>
+        <p>Explore the most powerful AI-powered coding environments to boost your development workflow</p>
+    </header>
+
+    <div class="container">
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search AI editors by name, features, or compatibility...">
+        </div>
+
+        <div class="editors-grid">
+            <div class="editor-card">
+                <div class="editor-header">
+                    <div class="editor-icon">GH</div>
+                    <div class="editor-title">
+                        <h2>GitHub Copilot</h2>
+                        <div class="price-tag">$10/month (Individual)</div>
+                    </div>
+                </div>
+                <div class="tags-container">
+                    <span class="tag">AI Completion</span>
+                    <span class="tag">Multi-language</span>
+                    <span class="tag">Code Generation</span>
+                </div>
+                <ul class="features-list">
+                    <li>Advanced AI-powered code completion and generation</li>
+                    <li>Converts comments to functional code</li>
+                    <li>Supports all major programming languages</li>
+                    <li>Smart code refactoring suggestions</li>
+                    <li>Integration with GitHub repositories</li>
+                </ul>
+                <div class="compatibility">
+                    Compatible with: VS Code, Visual Studio, JetBrains IDEs, Neovim
+                </div>
+            </div>
+
+            <div class="editor-card">
+                <div class="editor-header">
+                    <div class="editor-icon">CW</div>
+                    <div class="editor-title">
+                        <h2>Amazon CodeWhisperer</h2>
+                        <div class="price-tag">Free for Individual / Pro for Teams</div>
+                    </div>
+                </div>
+                <div class="tags-container">
+                    <span class="tag">AWS Integration</span>
+                    <span class="tag">Security Scan</span>
+                    <span class="tag">Enterprise Ready</span>
+                </div>
+                <ul class="features-list">
+                    <li>Real-time code suggestions with AWS best practices</li>
+                    <li>Built-in security scanning</li>
+                    <li>Automated code reviews</li>
+                    <li>Reference tracking for generated code</li>
+                    <li>Customizable to your codebase</li>
+                </ul>
+                <div class="compatibility">
+                    Compatible with: VS Code, AWS Cloud9, JetBrains, Visual Studio, AWS Lambda Console
+                </div>
+            </div>
+
+            <div class="editor-card">
+                <div class="editor-header">
+                    <div class="editor-icon">TN</div>
+                    <div class="editor-title">
+                        <h2>Tabnine</h2>
+                        <div class="price-tag">Free / $12/month Pro / Custom Enterprise</div>
+                    </div>
+                </div>
+                <div class="tags-container">
+                    <span class="tag">Local AI</span>
+                    <span class="tag">Privacy Focus</span>
+                    <span class="tag">Team Features</span>
+                </div>
+                <ul class="features-list">
+                    <li>Local AI processing for enhanced privacy</li>
+                    <li>Whole-line and full-function completion</li>
+                    <li>Custom AI models for your codebase</li>
+                    <li>Team collaboration and sharing</li>
+                    <li>Support for 31+ programming languages</li>
+                </ul>
+                <div class="compatibility">
+                    Compatible with: VS Code, IntelliJ, PyCharm, WebStorm, Android Studio
+                </div>
+            </div>
+
+            <div class="editor-card">
+                <div class="editor-header">
+                    <div class="editor-icon">CD</div>
+                    <div class="editor-title">
+                        <h2>Codeium</h2>
+                        <div class="price-tag">Free for Individual / Enterprise Available</div>
+                    </div>
+                </div>
+                <div class="tags-container">
+                    <span class="tag">Fast</span>
+                    <span class="tag">Free Tier</span>
+                    <span class="tag">Natural Language</span>
+                </div>
+                <ul class="features-list">
+                    <li>Ultra-fast code completions</li>
+                    <li>Natural language to code conversion</li>
+                    <li>Context-aware suggestions</li>
+                    <li>File-level completions</li>
+                    <li>Explanation generation for code</li>
+                </ul>
+                <div class="compatibility">
+                    Compatible with: VS Code, JetBrains, Vim, Emacs, Eclipse, Visual Studio
+                </div>
+            </div>
+
+            <div class="editor-card">
+                <div class="editor-header">
+                    <div class="editor-icon">CL</div>
+                    <div class="editor-title">
+                        <h2>Cursor</h2>
+                        <div class="price-tag">Free / Pro $20/month</div>
+                    </div>
+                </div>
+                <div class="tags-container">
+                    <span class="tag">ChatGPT Powered</span>
+                    <span class="tag">Code Chat</span>
+                    <span class="tag">Fast Editor</span>
+                </div>
+                <ul class="features-list">
+                    <li>Built-in AI chat for code assistance</li>
+                    <li>Intelligent code editing and refactoring</li>
+                    <li>Quick file navigation and search</li>
+                    <li>Code explanation generation</li>
+                    <li>Multiple AI models support</li>
+                </ul>
+                <div class="compatibility">
+                    Compatible with: Standalone Editor (Based on VS Code)
+                </div>
+            </div>
+
+            <div class="editor-card">
+                <div class="editor-header">
+                    <div class="editor-icon">KT</div>
+                    <div class="editor-title">
+                        <h2>Kite</h2>
+                        <div class="price-tag">Free / Team Plans Available</div>
+                    </div>
+                </div>
+                <div class="tags-container">
+                    <span class="tag">Line-of-Code</span>
+                    <span class="tag">Python Focus</span>
+                    <span class="tag">Smart Docs</span>
+                </div>
+                <ul class="features-list">
+                    <li>Python-focused code completions</li>
+                    <li>Smart code documentation</li>
+                    <li>Function signature help</li>
+                    <li>Popular library integrations</li>
+                    <li>Local processing available</li>
+                </ul>
+                <div class="compatibility">
+                    Compatible with: VS Code, Atom, Sublime Text, PyCharm, IntelliJ
+                </div>
+            </div>
+        </div>
+      <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h3>What is an AI coding editor?</h3>
+                <p>An AI coding editor is a development environment enhanced with artificial intelligence to provide smart code completions, suggestions, and automated assistance while you code.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Are these tools worth the cost?</h3>
+                <p>Most developers report significant productivity gains that justify the investment. Many tools offer free tiers to test before committing to a paid plan.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Do I need internet connection?</h3>
+                <p>Most AI coding tools require internet connection, but some like Tabnine offer local AI processing options for offline use.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What about code privacy?</h3>
+                <p>Each tool has different privacy policies. Some offer local processing, while others have strict data handling policies. Enterprise versions often include additional privacy features.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I use multiple AI editors?</h3>
+                <p>Yes, many developers use different AI tools for different purposes. Just be mindful of potential conflicts when running multiple extensions simultaneously.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Which languages are supported?</h3>
+                <p>Support varies by tool, but most major AI coding editors cover popular programming languages like Python, JavaScript, Java, and C++. Check individual tools for specific language support.</p>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
