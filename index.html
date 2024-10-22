@@ -187,46 +187,6 @@
             font-size: 0.9rem;
             color: #64748b;
         }
-        .faq-section {
-            margin-top: 4rem;
-            padding-top: 4rem;
-            border-top: 1px solid var(--accent);
-        }
-
-        .faq-section h2 {
-            text-align: center;
-            color: var(--primary);
-            margin-bottom: 2rem;
-            font-size: 2rem;
-        }
-
-        .faq-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .faq-item h3 {
-            color: var(--primary);
-            margin-bottom: 0.75rem;
-            font-size: 1.1rem;
-        }
-
-        .faq-item p {
-            color: var(--text);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-      
 
         @media (max-width: 768px) {
             header {
@@ -253,107 +213,8 @@
         <p>Explore the most powerful AI-powered coding environments to boost your development workflow</p>
     </header>
 
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchBar = document.getElementById('searchBar');
-            const filterTags = document.getElementById('filterTags');
-            const editorCards = document.querySelectorAll('.editor-card');
-            const noResults = document.getElementById('noResults');
-            
-            // Keep track of active filters
-            let activeFilters = new Set();
-
-            // Search functionality
-            function performSearch() {
-                const searchTerm = searchBar.value.toLowerCase();
-                let hasVisibleCards = false;
-
-                editorCards.forEach(card => {
-                    const cardContent = card.textContent.toLowerCase();
-                    const matchesSearch = cardContent.includes(searchTerm);
-                    const matchesFilters = activeFilters.size === 0 || 
-                        Array.from(activeFilters).every(filter => {
-                            switch(filter) {
-                                case 'free':
-                                    return cardContent.includes('free');
-                                case 'python':
-                                    return cardContent.includes('python');
-                                case 'vscode':
-                                    return cardContent.includes('vs code');
-                                case 'enterprise':
-                                    return cardContent.includes('enterprise');
-                                case 'local':
-                                    return cardContent.includes('local');
-                                default:
-                                    return true;
-                            }
-                        });
-
-                    const shouldShow = matchesSearch && matchesFilters;
-                    card.classList.toggle('hidden', !shouldShow);
-                    if (shouldShow) hasVisibleCards = true;
-                });
-
-                // Show/hide no results message
-                noResults.classList.toggle('visible', !hasVisibleCards);
-            }
-
-            // Debounce function to limit search frequency
-            function debounce(func, wait) {
-                let timeout;
-                return function executedFunction(...args) {
-                    const later = () => {
-                        clearTimeout(timeout);
-                        func(...args);
-                    };
-                    clearTimeout(timeout);
-                    timeout = setTimeout(later, wait);
-                };
-            }
-
-            // Add search event listener with debounce
-            searchBar.addEventListener('input', debounce(() => {
-                performSearch();
-            }, 300));
-
-            // Filter tags functionality
-            filterTags.addEventListener('click', (e) => {
-                if (e.target.classList.contains('filter-tag')) {
-                    const filter = e.target.dataset.filter;
-                    e.target.classList.toggle('active');
-
-                    if (e.target.classList.contains('active')) {
-                        activeFilters.add(filter);
-                    } else {
-                        activeFilters.delete(filter);
-                    }
-
-                    performSearch();
-                }
-            });
-
-            // Initialize custom scroll restoration
-            if ('scrollRestoration' in history) {
-                history.scrollRestoration = 'manual';
-            }
-
-            // Add smooth scrolling to search results
-            searchBar.addEventListener('focus', () => {
-                const searchContainer = document.querySelector('.search-container');
-                searchContainer.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
-
     <div class="container">
-       
-        <div class="editors-grid" id="editorsGrid">
-        </div>
-        
-    </div>
-
-
-        <div class="editors-grid">
+       <div class="editors-grid">
             <div class="editor-card">
                 <div class="editor-header">
                     <div class="editor-icon">GH</div>
@@ -504,40 +365,6 @@
                 </div>
             </div>
         </div>
-      <div class="faq-section">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-grid">
-            <div class="faq-item">
-                <h3>What is an AI coding editor?</h3>
-                <p>An AI coding editor is a development environment enhanced with artificial intelligence to provide smart code completions, suggestions, and automated assistance while you code.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3>Are these tools worth the cost?</h3>
-                <p>Most developers report significant productivity gains that justify the investment. Many tools offer free tiers to test before committing to a paid plan.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3>Do I need internet connection?</h3>
-                <p>Most AI coding tools require internet connection, but some like Tabnine offer local AI processing options for offline use.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3>What about code privacy?</h3>
-                <p>Each tool has different privacy policies. Some offer local processing, while others have strict data handling policies. Enterprise versions often include additional privacy features.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3>Can I use multiple AI editors?</h3>
-                <p>Yes, many developers use different AI tools for different purposes. Just be mindful of potential conflicts when running multiple extensions simultaneously.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3>Which languages are supported?</h3>
-                <p>Support varies by tool, but most major AI coding editors cover popular programming languages like Python, JavaScript, Java, and C++. Check individual tools for specific language support.</p>
-            </div>
-        </div>
-    </div>
     </div>
 </body>
 </html>
