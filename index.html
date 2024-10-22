@@ -187,6 +187,45 @@
             font-size: 0.9rem;
             color: #64748b;
         }
+                .faq-section {
+            margin-top: 4rem;
+            padding-top: 4rem;
+            border-top: 1px solid var(--accent);
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .faq-item p {
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
 
         @media (max-width: 768px) {
             header {
@@ -363,6 +402,40 @@
                 <div class="compatibility">
                     Compatible with: VS Code, Atom, Sublime Text, PyCharm, IntelliJ
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h3>What is an AI coding editor?</h3>
+                <p>An AI coding editor is a development environment enhanced with artificial intelligence to provide smart code completions, suggestions, and automated assistance while you code.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Are these tools worth the cost?</h3>
+                <p>Most developers report significant productivity gains that justify the investment. Many tools offer free tiers to test before committing to a paid plan.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Do I need internet connection?</h3>
+                <p>Most AI coding tools require internet connection, but some like Tabnine offer local AI processing options for offline use.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What about code privacy?</h3>
+                <p>Each tool has different privacy policies. Some offer local processing, while others have strict data handling policies. Enterprise versions often include additional privacy features.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I use multiple AI editors?</h3>
+                <p>Yes, many developers use different AI tools for different purposes. Just be mindful of potential conflicts when running multiple extensions simultaneously.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Which languages are supported?</h3>
+                <p>Support varies by tool, but most major AI coding editors cover popular programming languages like Python, JavaScript, Java, and C++. Check individual tools for specific language support.</p>
             </div>
         </div>
     </div>
