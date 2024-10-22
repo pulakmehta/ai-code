@@ -253,10 +253,123 @@
         <p>Explore the most powerful AI-powered coding environments to boost your development workflow</p>
     </header>
 
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchBar = document.getElementById('searchBar');
+            const filterTags = document.getElementById('filterTags');
+            const editorCards = document.querySelectorAll('.editor-card');
+            const noResults = document.getElementById('noResults');
+            
+            // Keep track of active filters
+            let activeFilters = new Set();
+
+            // Search functionality
+            function performSearch() {
+                const searchTerm = searchBar.value.toLowerCase();
+                let hasVisibleCards = false;
+
+                editorCards.forEach(card => {
+                    const cardContent = card.textContent.toLowerCase();
+                    const matchesSearch = cardContent.includes(searchTerm);
+                    const matchesFilters = activeFilters.size === 0 || 
+                        Array.from(activeFilters).every(filter => {
+                            switch(filter) {
+                                case 'free':
+                                    return cardContent.includes('free');
+                                case 'python':
+                                    return cardContent.includes('python');
+                                case 'vscode':
+                                    return cardContent.includes('vs code');
+                                case 'enterprise':
+                                    return cardContent.includes('enterprise');
+                                case 'local':
+                                    return cardContent.includes('local');
+                                default:
+                                    return true;
+                            }
+                        });
+
+                    const shouldShow = matchesSearch && matchesFilters;
+                    card.classList.toggle('hidden', !shouldShow);
+                    if (shouldShow) hasVisibleCards = true;
+                });
+
+                // Show/hide no results message
+                noResults.classList.toggle('visible', !hasVisibleCards);
+            }
+
+            // Debounce function to limit search frequency
+            function debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            }
+
+            // Add search event listener with debounce
+            searchBar.addEventListener('input', debounce(() => {
+                performSearch();
+            }, 300));
+
+            // Filter tags functionality
+            filterTags.addEventListener('click', (e) => {
+                if (e.target.classList.contains('filter-tag')) {
+                    const filter = e.target.dataset.filter;
+                    e.target.classList.toggle('active');
+
+                    if (e.target.classList.contains('active')) {
+                        activeFilters.add(filter);
+                    } else {
+                        activeFilters.delete(filter);
+                    }
+
+                    performSearch();
+                }
+            });
+
+            // Initialize custom scroll restoration
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+
+            // Add smooth scrolling to search results
+            searchBar.addEventListener('focus', () => {
+                const searchContainer = document.querySelector('.search-container');
+                searchContainer.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+
     <div class="container">
+        <!---
         <div class="search-container">
-            <input type="text" class="search-bar" placeholder="Search AI editors by name, features, or compatibility...">
+            <input type="text" 
+                   class="search-bar" 
+                   id="searchBar" 
+                   placeholder="Search AI editors by name, features, or compatibility...">
+            <div class="filter-tags" id="filterTags">
+                <span class="filter-tag" data-filter="free">Free Tools</span>
+                <span class="filter-tag" data-filter="python">Python Support</span>
+                <span class="filter-tag" data-filter="vscode">VS Code</span>
+                <span class="filter-tag" data-filter="enterprise">Enterprise</span>
+                <span class="filter-tag" data-filter="local">Local Processing</span>
+            </div>
         </div>
+        --->
+
+        <div class="editors-grid" id="editorsGrid">
+            <!-- Previous editor cards remain the same -->
+            <div class="no-results" id="noResults">
+                No editors match your search criteria
+            </div>
+        </div>
+    </div>
+
 
         <div class="editors-grid">
             <div class="editor-card">
